@@ -17,7 +17,7 @@ struct Leitor {
 struct Leitor listaLeitores[50];
 int totalLeitores = 0;
 
-// Autor: Seu Nome Completo - RGM
+// Autor: Lucas Bozek - RGM
 void moduloLeitores() {
     int opcaoLeitor;
 
@@ -60,7 +60,7 @@ void moduloLeitores() {
 
 // ============================================================================
 // MODULO: ACERVO DE LIVROS
-// Autor: Integrante B (Nome Completo e RGM)
+// Autor: Integrante B Luccas
 // ============================================================================
 
 // Struct no escopo global (7 campos: int, char[], float)
@@ -78,7 +78,7 @@ struct Livro acervo[50];
 int totalLivros = 0;
 
 // Procura um livro ATIVO pelo id. Retorna a posicao no vetor ou -1 se nao achar.
-// Autor: Integrante B (Nome Completo e RGM)
+// Autor: Integrante B Luccas
 int buscarIndiceLivro(int idProcurado) {
     int i;
     for (i = 0; i < totalLivros; i++) {
@@ -89,7 +89,7 @@ int buscarIndiceLivro(int idProcurado) {
     return -1;
 }
 
-// Autor: Integrante B (Nome Completo e RGM)
+// Autor: Integrante B Luccas
 void cadastrarLivro() {
     if (totalLivros >= 50) {
         printf("\n[ERRO] Acervo cheio (maximo de 50 livros)!\n");
@@ -115,7 +115,7 @@ void cadastrarLivro() {
     printf("\nLivro cadastrado com sucesso!\n");
 }
 
-// Autor: Integrante B (Nome Completo e RGM)
+// Autor: Integrante B Luccas
 void listarLivros() {
     int i, encontrou = 0;
 
@@ -135,7 +135,7 @@ void listarLivros() {
     }
 }
 
-// Autor: Integrante B (Nome Completo e RGM)
+// Autor: Integrante B Luccas
 void buscarLivroPorTitulo() {
     char termo[60];
     int i, encontrou = 0;
@@ -157,7 +157,7 @@ void buscarLivroPorTitulo() {
     }
 }
 
-// Autor: Integrante B (Nome Completo e RGM)
+// Autor: Integrante B Luccas
 void editarLivro() {
     int idEdicao, pos;
 
@@ -185,7 +185,7 @@ void editarLivro() {
     printf("\nLivro atualizado com sucesso!\n");
 }
 
-// Autor: Integrante B (Nome Completo e RGM)
+// Autor: Integrante B Luccas
 void removerLivro() {
     int idRemocao, pos;
 
