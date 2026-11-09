@@ -1,0 +1,216 @@
+#include <stdio.h>
+#include <string.h>
+
+// ----------------------------------------------------------------------------
+// MODULO 3: CATALOGO DE AUTORES CLASSICOS
+// Autor: Nicolas Henrique da Silva Honorio (RGM: ____________)
+// ----------------------------------------------------------------------------
+
+struct Autor {
+    int idAutor;
+    char nome[50];
+    char nacionalidade[30];
+    int anoNascimento;
+    char obraMaisFamosa[60];
+    int ativo;
+};
+
+struct Autor catalogoAutores[50];
+int totalAutores = 0;
+
+int buscarIndiceAutor(int id) {
+    int i;
+    for (i = 0; i < totalAutores; i++) {
+        if (catalogoAutores[i].idAutor == id && catalogoAutores[i].ativo == 1) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+void exibirAutor(int i) {
+    printf("ID: %d\n", catalogoAutores[i].idAutor);
+    printf("Nome: %s\n", catalogoAutores[i].nome);
+    printf("Nacionalidade: %s\n", catalogoAutores[i].nacionalidade);
+    printf("Ano de nascimento: %d\n", catalogoAutores[i].anoNascimento);
+    printf("Obra mais famosa: %s\n", catalogoAutores[i].obraMaisFamosa);
+    printf("------------------------------------\n");
+}
+
+void cadastrarAutor() {
+    if (totalAutores >= 50) {
+        printf("\n[ERRO] Catalogo cheio! Limite de 50 autores atingido.\n");
+        return;
+    }
+
+    catalogoAutores[totalAutores].idAutor = totalAutores + 1;
+
+    printf("\n--- CADASTRO DE AUTOR ---\n");
+    printf("Nome: ");
+    scanf(" %49[^\n]", catalogoAutores[totalAutores].nome);
+    printf("Nacionalidade: ");
+    scanf(" %29[^\n]", catalogoAutores[totalAutores].nacionalidade);
+    printf("Ano de nascimento: ");
+    scanf("%d", &catalogoAutores[totalAutores].anoNascimento);
+    printf("Obra mais famosa: ");
+    scanf(" %59[^\n]", catalogoAutores[totalAutores].obraMaisFamosa);
+
+    catalogoAutores[totalAutores].ativo = 1;
+
+    printf("\nAutor cadastrado com sucesso! ID gerado: %d\n",
+           catalogoAutores[totalAutores].idAutor);
+    totalAutores++;
+}
+
+void listarOuBuscarAutores() {
+    int escolha, i, id, encontrou;
+
+    printf("\n1. Listar todos os autores\n");
+    printf("2. Buscar autor por ID\n");
+    printf("Escolha: ");
+    scanf("%d", &escolha);
+
+    if (escolha == 1) {
+        encontrou = 0;
+        printf("\n--- AUTORES CADASTRADOS ---\n");
+        for (i = 0; i < totalAutores; i++) {
+            if (catalogoAutores[i].ativo == 1) {
+                exibirAutor(i);
+                encontrou = 1;
+            }
+        }
+        if (encontrou == 0) {
+            printf("Nenhum autor cadastrado.\n");
+        }
+    } else if (escolha == 2) {
+        printf("Digite o ID do autor: ");
+        scanf("%d", &id);
+        i = buscarIndiceAutor(id);
+        if (i == -1) {
+            printf("\nAutor com ID %d nao encontrado.\n", id);
+        } else {
+            printf("\n");
+            exibirAutor(i);
+        }
+    } else {
+        printf("\n[ERRO] Opcao invalida!\n");
+    }
+}
+
+void editarAutor() {
+    int id, i, campo;
+
+    printf("\nDigite o ID do autor que deseja editar: ");
+    scanf("%d", &id);
+    i = buscarIndiceAutor(id);
+
+    if (i == -1) {
+        printf("\nAutor com ID %d nao encontrado.\n", id);
+        return;
+    }
+
+    printf("\nDados atuais:\n");
+    exibirAutor(i);
+
+    printf("Qual campo deseja alterar?\n");
+    printf("1. Nome\n");
+    printf("2. Nacionalidade\n");
+    printf("3. Ano de nascimento\n");
+    printf("4. Obra mais famosa\n");
+    printf("0. Cancelar\n");
+    printf("Escolha: ");
+    scanf("%d", &campo);
+
+    switch (campo) {
+        case 1:
+            printf("Novo nome: ");
+            scanf(" %49[^\n]", catalogoAutores[i].nome);
+            printf("\nNome atualizado!\n");
+            break;
+        case 2:
+            printf("Nova nacionalidade: ");
+            scanf(" %29[^\n]", catalogoAutores[i].nacionalidade);
+            printf("\nNacionalidade atualizada!\n");
+            break;
+        case 3:
+            printf("Novo ano de nascimento: ");
+            scanf("%d", &catalogoAutores[i].anoNascimento);
+            printf("\nAno atualizado!\n");
+            break;
+        case 4:
+            printf("Nova obra mais famosa: ");
+            scanf(" %59[^\n]", catalogoAutores[i].obraMaisFamosa);
+            printf("\nObra atualizada!\n");
+            break;
+        case 0:
+            printf("\nEdicao cancelada.\n");
+            break;
+        default:
+            printf("\n[ERRO] Opcao invalida!\n");
+    }
+}
+
+void removerAutor() {
+    int id, i;
+    char confirmacao;
+
+    printf("\nDigite o ID do autor que deseja remover: ");
+    scanf("%d", &id);
+    i = buscarIndiceAutor(id);
+
+    if (i == -1) {
+        printf("\nAutor com ID %d nao encontrado.\n", id);
+        return;
+    }
+
+    printf("\nVoce vai remover:\n");
+    exibirAutor(i);
+    printf("Confirma a remocao? (s/n): ");
+    scanf(" %c", &confirmacao);
+
+    if (confirmacao == 's' || confirmacao == 'S') {
+        catalogoAutores[i].ativo = 0;
+        printf("\nAutor removido com sucesso!\n");
+    } else {
+        printf("\nRemocao cancelada.\n");
+    }
+}
+
+void moduloAutores() {
+    int opcaoAutor;
+    do {
+        printf("\n--- [MODULO 3: CATALOGO DE AUTORES (Integrante C)] ---\n");
+        printf("1. Cadastrar Novo Autor\n");
+        printf("2. Listar / Buscar Autores\n");
+        printf("3. Editar Dados de Autor\n");
+        printf("4. Remover Autor\n");
+        printf("0. Voltar ao Menu Principal\n");
+        printf("Escolha uma acao: ");
+        scanf("%d", &opcaoAutor);
+
+        switch (opcaoAutor) {
+            case 1:
+                cadastrarAutor();
+                break;
+            case 2:
+                listarOuBuscarAutores();
+                break;
+            case 3:
+                editarAutor();
+                break;
+            case 4:
+                removerAutor();
+                break;
+            case 0:
+                printf("\nRetornando ao menu principal...\n");
+                break;
+            default:
+                printf("\n[ERRO] Opcao invalida no Modulo de Autores!\n");
+        }
+    } while (opcaoAutor != 0);
+}
+
+int main() {
+    moduloAutores();
+    return 0;
+}
