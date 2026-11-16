@@ -1,6 +1,6 @@
 // ============================================================================
 // Arquivo: leitores.h | MODULO 1: FICHARIO DE LEITORES
-// Autor: Lucas Bozek - RGM
+// Autor: Lucas Bozek - 49245112
 // ============================================================================
 #ifndef LEITORES_H
 #define LEITORES_H
@@ -21,7 +21,7 @@ struct Leitor listaLeitores[50];
 int totalLeitores = 0;
 
 // Grava (ou regrava) todo o vetor no arquivo leitores.csv
-// Autor: Lucas Bozek - RGM
+// Autor: Lucas Bozek - 49245112
 void salvarLeitoresCSV() {
     int i;
     FILE *arq = fopen("leitores.csv", "w"); // modo "w" zera o arquivo e regrava tudo
@@ -42,7 +42,7 @@ void salvarLeitoresCSV() {
 }
 
 // Carrega os leitores do arquivo leitores.csv ao abrir o programa
-// Autor: Lucas Bozek - RGM
+// Autor: Lucas Bozek - 49245112
 void carregarLeitoresCSV() {
     FILE *arq = fopen("leitores.csv", "r");
     if (arq == NULL) return; // se o arquivo ainda nao existe, comeca com 0 registros
@@ -62,7 +62,7 @@ void carregarLeitoresCSV() {
 }
 
 // Procura um leitor ATIVO pelo ID. Retorna a posicao no vetor ou -1 se nao achar.
-// Autor: Lucas Bozek - RGM
+// Autor: Lucas Bozek - 49245112
 int buscarIndiceLeitor(int id) {
     int i;
     for (i = 0; i < totalLeitores; i++) {
@@ -73,7 +73,7 @@ int buscarIndiceLeitor(int id) {
     return -1;
 }
 
-// Autor: Lucas Bozek - RGM
+// Autor: Lucas Bozek - 49245112
 void cadastrarLeitor() {
     if (totalLeitores >= 50) {
         printf("\n[ERRO] Fichario cheio (maximo de 50 leitores)!\n");
@@ -97,7 +97,7 @@ void cadastrarLeitor() {
     printf("\nLeitor cadastrado com sucesso e salvo em 'leitores.csv'!\n");
 }
 
-// Autor: Lucas Bozek - RGM
+// Autor: Lucas Bozek - 49245112
 void listarLeitores() {
     int i, encontrou = 0;
 
@@ -118,7 +118,7 @@ void listarLeitores() {
 }
 
 // Busca textual: procura um pedaco do nome com strstr
-// Autor: Lucas Bozek - RGM
+// Autor: Lucas Bozek - 49245112
 void buscarLeitorPorNome() {
     char termo[50];
     int i, encontrou = 0;
@@ -142,7 +142,7 @@ void buscarLeitorPorNome() {
 }
 
 // Edita um campo na memoria e regrava o CSV inteiro
-// Autor: Lucas Bozek - RGM
+// Autor: Lucas Bozek - 49245112
 void editarLeitor() {
     int id, i, campo;
 
@@ -193,7 +193,7 @@ void editarLeitor() {
 }
 
 // Remocao logica (ativo = 0). Regra de negocio: nao remove leitor com livro em maos.
-// Autor: Lucas Bozek - RGM
+// Autor: Lucas Bozek - 49245112
 void removerLeitor() {
     int id, i;
 
@@ -217,7 +217,7 @@ void removerLeitor() {
 }
 
 // Submenu do modulo (chamado pelo menu principal)
-// Autor: Lucas Bozek - RGM
+// Autor: Lucas Bozek - 49245112
 void moduloLeitores() {
     int opcaoLeitor;
 
